@@ -17,7 +17,9 @@
             /* 字體大小 */
             --font-size: 30px;
             /* 文字左右邊的留白 */
-            --text-padding: 30px;
+            --text-padding-horizontal: 30px;
+            /* 文字上下邊的留白 */
+            --text-padding-vertical: 20px;
         }
 
         body {
@@ -34,7 +36,7 @@
             /* 設定視窗高度 */
             height: 100vh;
             /* 使用文字左右邊的留白變數 */
-            padding: 0 var(--text-padding);
+            padding: 0 var(--text-padding-horizontal);
         }
 
         #text {
@@ -45,7 +47,7 @@
             /* 設定最大寬度 */
             max-width: 90%;
             /* 設定內部左右的留白 */
-            padding: 0 20px;
+            padding: var(--text-padding-vertical) 20px;
             /* 設定文字換行 */
             overflow-wrap: break-word;
         }
@@ -69,15 +71,30 @@
                 opacity: 1;
             }
         }
+
+        #bgMusic {
+            position: fixed;
+            width: 1px;
+            height: 1px;
+            left: -10px;
+            overflow: hidden;
+            z-index: -1;
+        }
     </style>
 </head>
 
 <body>
+    <!-- <iframe style="border-radius:12px"
+        src="https://open.spotify.com/embed/track/7diY4bRXZ7ca6BEGNlz3xL?utm_source=generator&autoplay=1" width="30%" height="300"
+        frameBorder="0" allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe> -->
+
     <div id="text"></div>
 
-    <!-- YouTube背景音樂 -->
-    <iframe width="0" height="0" src="https://www.youtube.com/embed/puqpMg4WYso?autoplay=1&loop=1&playlist=puqpMg4WYso"
-        frameborder="0" allowfullscreen></iframe>
+
+
+    <!-- Spotify 背景音樂 -->
+    <!-- <iframe src="{{ track_url }}" width="100" height="100"></iframe> -->
 
     <script>
         // 當網頁加載完成後執行此函數
@@ -93,39 +110,33 @@
                     const textElement = document.getElementById('text');
 
                     // 打字速度變數，數字越小打字越快
-                    const typingSpeed = 200;
+                    const typingSpeed = 1;
 
                     let index = 0;
 
+
+                    let userScrolled = false;
+
+                    // 監聽滾動事件
+                    window.addEventListener('scroll', function () {
+                        userScrolled = true;
+                    });
 
                     function typeText() {
                         /* 如果還沒打完，繼續打字 */
                         if (index < content.length) {
                             textElement.innerHTML += content[index];
-
-                            // 以下這段程式碼是當content變數的文字寫在程式碼裡面(如下)才需要:
-                            // const content = `
-                            // 我跟一 個女孩	擁抱，
-                            // 我像嗑了藥，瘋狂地想她，
-                            // 我現在在船上，暈到要吐了出來，
-                            // 但我很享受這個感覺。`;
-
-                            // 如果當前字符是換行，則添加<br>到HTML
-                            // if (content[index] === '\n') {
-                            //     textElement.innerHTML += '<br>';
-                            // } else if (content[index] === '\t') { // 檢查是否為Tab
-                            //     textElement.innerHTML += '&nbsp;&nbsp;&nbsp;&nbsp;'; // 將Tab轉換為四個空格
-                            // } else {
-                            //     textElement.innerHTML += content[index];
-                            // }
-
                             index++;
+
+                            // 只有當用戶沒有手動滾動頁面時，才自動滾動到底部
+                            if (!userScrolled) {
+                                window.scrollTo(0, document.body.scrollHeight);
+                            }
+
                             /* 使用setTimeout來控制打字速度 */
                             setTimeout(typeText, typingSpeed);
                         }
                     }
-
-
 
                     /* 開始打字 */
                     typeText();
