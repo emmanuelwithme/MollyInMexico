@@ -1,7 +1,7 @@
 # MollyInMexico Flask App
 
 這是一個簡單的 Flask 應用程序，用於顯示一段熱烈的抒情文，表達強烈的愛意。
-專案名稱緣由是因為這首歌： ［Lauv - Molly In Mexico(https://open.spotify.com/track/7diY4bRXZ7ca6BEGNlz3xL?si=O1oDBErDT0-DA4ABBDrbrg)
+專案名稱緣由是因為這首歌： [Lauv - Molly In Mexico](https://open.spotify.com/track/7diY4bRXZ7ca6BEGNlz3xL?si=8IHecmARTqidwQtmBXZO_g)
 
 ## 功能
 
