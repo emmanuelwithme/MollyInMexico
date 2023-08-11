@@ -22,6 +22,33 @@
             --text-padding-vertical: 20px;
         }
 
+        /* 手機視圖 */
+        @media only screen and (max-width: 600px) {
+            :root {
+                --font-size: 18px;
+                --text-padding-horizontal: 15px;
+                --text-padding-vertical: 10px;
+            }
+        }
+
+        /* 平板視圖 */
+        @media only screen and (min-width: 601px) and (max-width: 1024px) {
+            :root {
+                --font-size: 24px;
+                --text-padding-horizontal: 20px;
+                --text-padding-vertical: 15px;
+            }
+        }
+
+        /* 桌面視圖 */
+        @media only screen and (min-width: 1025px) {
+            :root {
+                --font-size: 30px;
+                --text-padding-horizontal: 30px;
+                --text-padding-vertical: 20px;
+            }
+        }
+
         body {
             /* 設定字體 */
             font-family: 'Noto Serif TC', serif;
@@ -50,6 +77,9 @@
             padding: var(--text-padding-vertical) 20px;
             /* 設定文字換行 */
             overflow-wrap: break-word;
+            /* 確保長單詞或連續無空格的情況下也能換行 */
+            word-wrap: break-word;
+            word-break: break-all;
         }
 
         #text::after {
@@ -72,14 +102,14 @@
             }
         }
 
-        #bgMusic {
+        /* #bgMusic {
             position: fixed;
             width: 1px;
             height: 1px;
             left: -10px;
             overflow: hidden;
             z-index: -1;
-        }
+        } */
     </style>
 </head>
 
@@ -110,7 +140,7 @@
                     const textElement = document.getElementById('text');
 
                     // 打字速度變數，數字越小打字越快
-                    const typingSpeed = 200;
+                    const typingSpeed = 10;
 
                     let index = 0;
 
