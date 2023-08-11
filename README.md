@@ -3,15 +3,22 @@
 這是一個簡單的 Flask 應用程序，用於顯示一段熱烈的抒情文，表達強烈的愛意。
 專案名稱緣由是因為這首歌： [Lauv - Molly In Mexico](https://open.spotify.com/track/7diY4bRXZ7ca6BEGNlz3xL?si=8IHecmARTqidwQtmBXZO_g)
 
+您也可以訪問此應用程式：[Molly In Mexico on Render](https://molly-in-mexico.onrender.com/)
+
+特定頁面連結:
+- [For Chin](https://molly-in-mexico.onrender.com/ForChin)
+- [For Ruth](https://molly-in-mexico.onrender.com/ForRuth)
+
+
 ## 功能
 
-- 顯示一段抒情文，該消息從 `content.txt` 文件中獲取。
+- 顯示一段抒情文，該文章從 `letter\ForRuth.txt` `letter\ForChin.txt` 文件中獲取。
 - 使用 Google 字體美化文本。
 - 有一個 YouTube 背景音樂播放器。
 
 ## 設定
 
-以下是一些主要的設定選項，你可以在 `/templates/MollyInMexico.html` 文件中找到它們：
+以下是一些主要的設定選項，你可以在 `/templates` 文件中各個`.html`檔案中找到它們：
 
 - **字體大小**: 透過 CSS 變數 `--font-size` 進行設定。預設值為 `30px`。
 - **段落左右留白**: 透過 CSS 變數 `--text-padding` 進行設定。預設值為 `30px`。
@@ -21,15 +28,21 @@
 
 ```
 /MollyInMexico/
+    .cache
+    .env
+    .gitignore
     app.py
     Procfile
     README.md
     requirements.txt
     runtime.txt
     /letter/
-        content.txt
+        ForChin.txt
+        ForRuth.txt
     /templates/
-        MollyInMexico.html
+        ForChin.html
+        ForRuth.html
+        index.html
 ```
 
 ## 安裝和運行

@@ -69,7 +69,7 @@
         #text {
             /* 1. 保留所有的空格、換行和縮排，就像你在原始碼中看到的那樣。
                2. 文字不會自動換行，除非你明確地在文本中加入了換行。 */
-            white-space: pre;
+            /* white-space: pre; */
             position: relative;
             /* 設定最大寬度 */
             max-width: 90%;
@@ -123,46 +123,54 @@
 </head>
 
 <body>
-    <div id="text"></div>
+    <div id="text">Hello, This is home page. Turn to personal page by different url.
+        <br>
+        <a href="https://www.youtube.com/watch?v=puqpMg4WYso&ab_channel=Lauv">Lauv - Molly In Mexico [Official
+            Audio]</a>
+    </div>
     <script>
-        const content = "Hello, This is home page. Turn to personal page by different url.";
-        // 使用 content 進行所需的操作，例如: 將content添加到 #text div
-
-        // 獲取HTML中的text元素
         const textElement = document.getElementById('text');
-
-        // 打字速度變數，數字越小打字越快
+        const content = textElement.innerHTML;
+        textElement.innerHTML = "";
         const typingSpeed = 100;
-
         let index = 0;
-
-
         let userScrolled = false;
 
-        // 監聽滾動事件
         window.addEventListener('scroll', function () {
             userScrolled = true;
         });
 
         function typeText() {
-            /* 如果還沒打完，繼續打字 */
             if (index < content.length) {
-                textElement.innerHTML += content[index];
-                index++;
+                if (content[index] === '<') {
+                    const closingTagIndex = content.indexOf('>', index);
 
-                // 只有當用戶沒有手動滾動頁面時，才自動滾動到底部
+                    // 如果是開始的 <a> 標籤
+                    if (content.substring(index, closingTagIndex).startsWith("<a")) {
+                        // 找到對應的結束標籤 </a>
+                        const endTagIndex = content.indexOf('</a>', index);
+                        textElement.innerHTML += content.substring(index, endTagIndex + 4);
+                        index = endTagIndex + 4;
+                    } else {
+                        textElement.innerHTML += content.substring(index, closingTagIndex + 1);
+                        index = closingTagIndex + 1;
+                    }
+                } else {
+                    textElement.innerHTML += content[index];
+                    index++;
+                }
+
                 if (!userScrolled) {
                     window.scrollTo(0, document.body.scrollHeight);
                 }
 
-                /* 使用setTimeout來控制打字速度 */
                 setTimeout(typeText, typingSpeed);
             }
         }
 
-        /* 開始打字 */
         typeText();
     </script>
 </body>
+
 
 </html>
