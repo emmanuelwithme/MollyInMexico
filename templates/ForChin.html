@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Chin</title>
+
+    <!-- 引入Google字體 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500&display=swap" rel="stylesheet">
+
+    <style>
+        /* 變數設定 */
+        :root {
+            /* 字體大小 */
+            --font-size: 30px;
+            /* 文字左右邊的留白 */
+            --text-padding-horizontal: 30px;
+            /* 文字上下邊的留白 */
+            --text-padding-vertical: 20px;
+        }
+
+        /* 手機視圖 */
+        @media only screen and (max-width: 600px) {
+            :root {
+                --font-size: 18px;
+                --text-padding-horizontal: 15px;
+                --text-padding-vertical: 10px;
+            }
+        }
+
+        /* 平板視圖 */
+        @media only screen and (min-width: 601px) and (max-width: 1024px) {
+            :root {
+                --font-size: 24px;
+                --text-padding-horizontal: 20px;
+                --text-padding-vertical: 15px;
+            }
+        }
+
+        /* 桌面視圖 */
+        @media only screen and (min-width: 1025px) {
+            :root {
+                --font-size: 30px;
+                --text-padding-horizontal: 30px;
+                --text-padding-vertical: 20px;
+            }
+        }
+
+        body {
+            /* 設定字體 */
+            font-family: 'Noto Serif TC', serif;
+            /* 設定字體大小 */
+            font-size: var(--font-size);
+            /* 背景顏色 */
+            background-color: #f4f4f4;
+            /* 使用flexbox使內容置中 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* 設定視窗高度 */
+            height: 100vh;
+            /* 使用文字左右邊的留白變數 */
+            padding: 0 var(--text-padding-horizontal);
+        }
+
+        #text {
+            /* 1. 保留所有的空格、換行和縮排，就像你在原始碼中看到的那樣。
+               2. 文字不會自動換行，除非你明確地在文本中加入了換行。 */
+            white-space: pre;
+            position: relative;
+            /* 設定最大寬度 */
+            max-width: 90%;
+            /* 設定內部左右的留白 */
+            padding: var(--text-padding-vertical) 20px;
+            /* 設定文字換行 */
+            overflow-wrap: break-word;
+            /* 確保長單詞或連續無空格的情況下也能換行 */
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+
+        #text::after {
+            /* 設定閃爍的光標 */
+            content: '|';
+            position: absolute;
+            /* vertical bar閃爍動畫 */
+            /* 播放@keyframes blink這個動畫 */
+            animation-name: blink;
+            /* 一次動畫播放持續的時間 */
+            animation-duration: 0.75s;
+            /* 確定了動畫在其持續時間內是如何加速或減速的 */
+            /* linear: 動畫從頭到尾的速度是相同的。
+                ease: 動畫以一個慢速開始，然後速度加快，在結束之前變慢。這是預設的 timing-function。
+                ease-in: 動畫以一個慢速開始。
+                ease-out: 動畫以一個慢速結束。
+                ease-in-out: 動畫以一個慢速開始和結束。
+                cubic-bezier(n, n, n, n): 定義一個貝塞爾曲線，提供動畫的具體速度曲線。這允許更高的自訂。
+                例如，如果你想要一個動畫在開始時加速，但在結束時減速，你可能會選擇 ease-in-out */
+            animation-timing-function: step-end;
+            /* 動畫播放無限次 */
+            animation-iteration-count: infinite;
+        }
+
+        /* 光標閃爍動畫 */
+        @keyframes blink {
+
+            /* from, to這表示動畫的開始（0%）和結束（100%）階段。 */
+            /* 開始和結束階段vertical bar的 opacity (不透明度) 都被設置為0，也就是是透明的*/
+            from,
+            to {
+                opacity: 0;
+            }
+
+            /* 動畫中間（50%）的階段，opacity (不透明度) 被設置為 1，vertical bar為完全不透明 */
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* #bgMusic {
+            position: fixed;
+            width: 1px;
+            height: 1px;
+            left: -10px;
+            overflow: hidden;
+            z-index: -1;
+        } */
+    </style>
+</head>
+
+<body>
+    <!-- <iframe style="border-radius:12px"
+        src="https://open.spotify.com/embed/track/7diY4bRXZ7ca6BEGNlz3xL?utm_source=generator&autoplay=1" width="30%" height="300"
+        frameBorder="0" allowfullscreen=""
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe> -->
+
+    <div id="text"></div>
+
+
+
+    <!-- Spotify 背景音樂 -->
+    <!-- <iframe src="{{ track_url }}" width="100" height="100"></iframe> -->
+
+    <script>
+        // 當網頁加載完成後執行此函數
+        window.onload = function () {
+            // 設定物件，用於存儲API的相關設定
+            const config = {
+                baseURL: "/",                   // 基本URL，通常是你的伺服器地址或網站根目錄
+                endpoint: "get-content",        // API的終點或路徑
+                params: {                       // 查詢參數的物件
+                    file_path: "letter/ForChin.txt",
+                    // param1: "value1",
+                    // param2: "value2",
+                    // param3: "value3",
+                    // ...您可以繼續添加更多參數
+                }
+            };
+
+            // 函數：從參數物件中建構查詢字串
+            function buildQueryString(params) {
+                // 使用Object.entries將物件轉換為鍵值對的數組，然後使用map方法生成查詢參數
+                // 例如，將 {key: "value"} 轉換為 "key=value"
+                return Object.entries(params)
+                    .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+                    .join('&');
+            }
+
+            // 建構完整的URL
+            const url = `${config.baseURL}${config.endpoint}?${buildQueryString(config.params)}`;
+
+            // 使用fetch API從Flask伺服器獲取內容
+            fetch(url)
+                .then(response => response.json())  // 解析響應為JSON
+                .then(data => {
+                    const content = data.content;
+                    // 使用 content 進行所需的操作，例如: 將content添加到 #text div
+
+                    // 獲取HTML中的text元素
+                    const textElement = document.getElementById('text');
+
+                    // 打字速度變數，數字越小打字越快
+                    const typingSpeed = 300;
+
+                    let index = 0;
+
+
+                    let userScrolled = false;
+
+                    // 監聽滾動事件
+                    window.addEventListener('scroll', function () {
+                        userScrolled = true;
+                    });
+
+                    function typeText() {
+                        /* 如果還沒打完，繼續打字 */
+                        if (index < content.length) {
+                            textElement.innerHTML += content[index];
+                            index++;
+
+                            // 只有當用戶沒有手動滾動頁面時，才自動滾動到底部
+                            if (!userScrolled) {
+                                window.scrollTo(0, document.body.scrollHeight);
+                            }
+
+                            /* 使用setTimeout來控制打字速度 */
+                            setTimeout(typeText, typingSpeed);
+                        }
+                    }
+
+                    /* 開始打字 */
+                    typeText();
+                })
+                .catch(error => {
+                    // 如果在獲取內容時出現錯誤，則在控制台中打印錯誤消息
+                    console.error('Error fetching content:', error);
+                });
+        }
+    </script>
+</body>
+
+</html>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Special Message</title>
+    <title>首頁</title>
 
     <!-- 引入Google字體 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -86,96 +86,82 @@
             /* 設定閃爍的光標 */
             content: '|';
             position: absolute;
-            animation: blink 0.75s step-end infinite;
+            /* vertical bar閃爍動畫 */
+            /* 播放@keyframes blink這個動畫 */
+            animation-name: blink;
+            /* 一次動畫播放持續的時間 */
+            animation-duration: 0.75s;
+            /* 確定了動畫在其持續時間內是如何加速或減速的 */
+            /* linear: 動畫從頭到尾的速度是相同的。
+                ease: 動畫以一個慢速開始，然後速度加快，在結束之前變慢。這是預設的 timing-function。
+                ease-in: 動畫以一個慢速開始。
+                ease-out: 動畫以一個慢速結束。
+                ease-in-out: 動畫以一個慢速開始和結束。
+                cubic-bezier(n, n, n, n): 定義一個貝塞爾曲線，提供動畫的具體速度曲線。這允許更高的自訂。
+                例如，如果你想要一個動畫在開始時加速，但在結束時減速，你可能會選擇 ease-in-out */
+            animation-timing-function: step-end;
+            /* 動畫播放無限次 */
+            animation-iteration-count: infinite;
         }
 
         /* 光標閃爍動畫 */
         @keyframes blink {
 
+            /* from, to這表示動畫的開始（0%）和結束（100%）階段。 */
+            /* 開始和結束階段vertical bar的 opacity (不透明度) 都被設置為0，也就是是透明的*/
             from,
             to {
                 opacity: 0;
             }
 
+            /* 動畫中間（50%）的階段，opacity (不透明度) 被設置為 1，vertical bar為完全不透明 */
             50% {
                 opacity: 1;
             }
         }
-
-        /* #bgMusic {
-            position: fixed;
-            width: 1px;
-            height: 1px;
-            left: -10px;
-            overflow: hidden;
-            z-index: -1;
-        } */
     </style>
 </head>
 
 <body>
-    <!-- <iframe style="border-radius:12px"
-        src="https://open.spotify.com/embed/track/7diY4bRXZ7ca6BEGNlz3xL?utm_source=generator&autoplay=1" width="30%" height="300"
-        frameBorder="0" allowfullscreen=""
-        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe> -->
-
     <div id="text"></div>
-
-
-
-    <!-- Spotify 背景音樂 -->
-    <!-- <iframe src="{{ track_url }}" width="100" height="100"></iframe> -->
-
     <script>
-        // 當網頁加載完成後執行此函數
-        window.onload = function () {
-            // 使用fetch API從Flask伺服器獲取內容
-            fetch('/get-content')
-                .then(response => response.json())  // 解析響應為JSON
-                .then(data => {
-                    const content = data.content;
-                    // 使用 content 進行所需的操作，例如: 將content添加到 #text div
+        const content = "Hello, This is home page. Turn to personal page by different url.";
+        // 使用 content 進行所需的操作，例如: 將content添加到 #text div
 
-                    // 獲取HTML中的text元素
-                    const textElement = document.getElementById('text');
+        // 獲取HTML中的text元素
+        const textElement = document.getElementById('text');
 
-                    // 打字速度變數，數字越小打字越快
-                    const typingSpeed = 200;
+        // 打字速度變數，數字越小打字越快
+        const typingSpeed = 100;
 
-                    let index = 0;
+        let index = 0;
 
 
-                    let userScrolled = false;
+        let userScrolled = false;
 
-                    // 監聽滾動事件
-                    window.addEventListener('scroll', function () {
-                        userScrolled = true;
-                    });
+        // 監聽滾動事件
+        window.addEventListener('scroll', function () {
+            userScrolled = true;
+        });
 
-                    function typeText() {
-                        /* 如果還沒打完，繼續打字 */
-                        if (index < content.length) {
-                            textElement.innerHTML += content[index];
-                            index++;
+        function typeText() {
+            /* 如果還沒打完，繼續打字 */
+            if (index < content.length) {
+                textElement.innerHTML += content[index];
+                index++;
 
-                            // 只有當用戶沒有手動滾動頁面時，才自動滾動到底部
-                            if (!userScrolled) {
-                                window.scrollTo(0, document.body.scrollHeight);
-                            }
+                // 只有當用戶沒有手動滾動頁面時，才自動滾動到底部
+                if (!userScrolled) {
+                    window.scrollTo(0, document.body.scrollHeight);
+                }
 
-                            /* 使用setTimeout來控制打字速度 */
-                            setTimeout(typeText, typingSpeed);
-                        }
-                    }
-
-                    /* 開始打字 */
-                    typeText();
-                })
-                .catch(error => {
-                    // 如果在獲取內容時出現錯誤，則在控制台中打印錯誤消息
-                    console.error('Error fetching content:', error);
-                });
+                /* 使用setTimeout來控制打字速度 */
+                setTimeout(typeText, typingSpeed);
+            }
         }
+
+        /* 開始打字 */
+        typeText();
     </script>
 </body>
 
