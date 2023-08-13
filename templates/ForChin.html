@@ -58,12 +58,14 @@
             background-color: #f4f4f4;
             /* 使用flexbox使內容置中 */
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: flex-start;
+            align-items: flex-start;
             /* 設定視窗高度 */
             height: 100vh;
             /* 使用文字左右邊的留白變數 */
             padding: 0 var(--text-padding-horizontal);
+            margin-top: 10%;
+            margin-left: 10%;
         }
 
         #text {
@@ -80,6 +82,7 @@
             /* 確保長單詞或連續無空格的情況下也能換行 */
             word-wrap: break-word;
             word-break: break-all;
+            color: 	#6B8E23;
         }
 
         #text::after {
@@ -183,7 +186,8 @@
                     const textElement = document.getElementById('text');
 
                     // 打字速度變數，數字越小打字越快
-                    const typingSpeed = 300;
+                    // 10ms*0.001s=0.01s
+                    const typingSpeed = 10;
 
                     let index = 0;
 
@@ -203,7 +207,7 @@
 
                             // 只有當用戶沒有手動滾動頁面時，才自動滾動到底部
                             if (!userScrolled) {
-                                window.scrollTo(0, document.body.scrollHeight);
+                                // window.scrollTo(0, document.body.scrollHeight);
                             }
 
                             /* 使用setTimeout來控制打字速度 */
