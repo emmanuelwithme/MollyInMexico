@@ -58,14 +58,16 @@
             background-color: #f4f4f4;
             /* 使用flexbox使內容置中 */
             display: flex;
-            justify-content: flex-start;
-            align-items: flex-start;
+            justify-content: center;
+            align-items: center;
+            /* justify-content: flex-start;
+            align-items: flex-start; */
             /* 設定視窗高度 */
             height: 100vh;
             /* 使用文字左右邊的留白變數 */
             padding: 0 var(--text-padding-horizontal);
-            margin-top: 10%;
-            margin-left: 10%;
+            /* margin-top: 10%;
+            margin-left: 10%; */
         }
 
         #text {
@@ -207,7 +209,7 @@
 
                             // 只有當用戶沒有手動滾動頁面時，才自動滾動到底部
                             if (!userScrolled) {
-                                // window.scrollTo(0, document.body.scrollHeight);
+                                window.scrollTo(0, document.body.scrollHeight);
                             }
 
                             /* 使用setTimeout來控制打字速度 */
