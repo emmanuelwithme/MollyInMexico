@@ -4,6 +4,7 @@
 專案名稱緣由是因為這首歌： [Lauv - Molly In Mexico](https://open.spotify.com/track/7diY4bRXZ7ca6BEGNlz3xL?si=8IHecmARTqidwQtmBXZO_g)
 
 您也可以訪問此應用程式：[Molly In Mexico on Render](https://molly-in-mexico.onrender.com/)
+雲端伺服器: [Render](https://render.com/)
 
 特定頁面連結:
 - [For Chin](https://molly-in-mexico.onrender.com/ForChin)
