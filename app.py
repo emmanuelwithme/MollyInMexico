@@ -27,8 +27,12 @@ def ForRuth():
     return render_template('ForRuth.html', track_url=track_url)
 
 @app1.route('/ForChin')
-def ForTiffany():
+def ForChin():
     return render_template('ForChin.html')
+
+@app1.route('/ForAngela')
+def ForAngela():
+    return render_template('ForAngela.html')
 
 def get_spotify_track_url(track_name):
     results = sp.search(q=track_name, limit=1)
