@@ -61,4 +61,5 @@ def get_content():
 # 啟動Flask應用程序
 if __name__ == '__main__':
     app1.run(debug=True)
-    
+# if __name__ == '__main__':
+#     app1.run(host='0.0.0.0', port=5000)
